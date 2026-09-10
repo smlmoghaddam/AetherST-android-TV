@@ -1,4 +1,22 @@
-name: Build Android TV APK
+- name: Setup Javaname: Build Android TV APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+       name: Build Android TV APK
 
 on:
   push:
@@ -20,6 +38,12 @@ jobs:
           java-version: '17'
           cache: gradle
 
+      - name: Accept Android licenses
+        run: yes | sdkmanager --licenses
+
+      - name: Install NDK
+        run: sdkmanager "ndk;30.0.15729638"
+
       - name: Grant permission
         run: chmod +x gradlew
 
@@ -29,5 +53,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: AetherST-Android-TV-APK
+          name: AetherST-TV-APK
           path: app/build/outputs/apk/debug/*.apk
+
