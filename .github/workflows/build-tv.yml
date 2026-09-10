@@ -8,8 +8,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+<<<<<<< HEAD
       - name: Checkout
         uses: actions/checkout@v4
+=======
+      - uses: actions/checkout@v4
+>>>>>>> b4eea9e (Add Android TV APK builder)
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -22,10 +26,18 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build APK
+<<<<<<< HEAD
         run: ./gradlew assembleDebug
+=======
+        run: ./gradlew :app:assembleDebug
+>>>>>>> b4eea9e (Add Android TV APK builder)
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
+<<<<<<< HEAD
           name: AetherST-Android-TV-APK
+=======
+          name: AetherST-Android-TV
+>>>>>>> b4eea9e (Add Android TV APK builder)
           path: app/build/outputs/apk/debug/*.apk
